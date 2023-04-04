@@ -1,0 +1,241 @@
+https://leetcode.com/problems/partitioning-into-minimum-number-of-deci-binary-numbers/
+
+class Solution {
+public:
+    int minPartitions(string n) {
+        int mx = 0;
+
+        for(auto i:n)
+        {
+            if(mx < i) 
+            {
+                mx = i;
+            }
+            if(i == '9') return 9;
+        }
+
+        return (mx - '0');
+         
+    }
+};
+
+----------------------------------------------------------------------------------------------------
+
+https://leetcode.com/problems/subrectangle-queries/
+
+class SubrectangleQueries(object):
+
+    def __init__(self, rectangle):
+        """
+        :type rectangle: List[List[int]]
+        """
+
+        self.rec = rectangle 
+
+    def updateSubrectangle(self, row1, col1, row2, col2, newValue):
+        """
+        :type row1: int
+        :type col1: int
+        :type row2: int
+        :type col2: int
+        :type newValue: int
+        :rtype: None
+        """
+
+        for i in range(row1, row2 + 1):
+            for j in range(col1, col2 + 1):
+                self.rec[i][j] = newValue 
+
+    def getValue(self, row, col):
+        """
+        :type row: int
+        :type col: int
+        :rtype: int
+        """
+
+        return self.rec[row][col]
+        
+
+# Your SubrectangleQueries object will be instantiated and called as such:
+# obj = SubrectangleQueries(rectangle)
+# obj.updateSubrectangle(row1,col1,row2,col2,newValue)
+# param_2 = obj.getValue(row,col)
+
+----------------------------------------------------------------------------------------------------
+
+https://leetcode.com/problems/strictly-palindromic-number/submissions/923568921/
+
+class Solution(object):
+    def isStrictlyPalindromic(self, n):
+        """
+        :type n: int
+        :rtype: bool
+        """
+
+        ret = True
+
+        def baseconv(n, b):
+            if n == 0:
+                return [0]
+            digits = []
+            while n:
+                digits.append(int(n % b))
+                n //= b
+            return digits[::-1]
+
+        def checkpali(digits):
+            index = 0
+            while index <= (len(digits) / 2):
+                if digits[index] != digits[-(index + 1)]:
+                    return False
+                index = index + 1
+            return True
+
+        for i in range(2, n-2+1):
+            if checkpali(baseconv(n, i)) == False:
+                return False
+
+        return ret
+
+----------------------------------------------------------------------------------------------------
+
+https://www.algoexpert.io/questions/sum-of-linked-lists
+
+# This is an input class. Do not edit.
+class LinkedList:
+    def __init__(self, value):
+        self.value = value
+        self.next = None
+
+
+def sumOfLinkedLists(linkedListOne, linkedListTwo):
+    
+    sum = 0
+    
+    index = 1
+    while linkedListOne:
+        sum = sum + index * linkedListOne.value
+        index = index * 10
+        linkedListOne = linkedListOne.next
+
+    index = 1
+    while linkedListTwo:
+        sum = sum + index * linkedListTwo.value
+        index = index * 10
+        linkedListTwo = linkedListTwo.next     
+
+    newlisthead = LinkedList(sum % 10)
+    node = newlisthead
+    sum = sum // 10
+
+    while sum > 0:
+        node.next = LinkedList(sum % 10)
+        sum = sum // 10
+        node = node.next
+    
+    return newlisthead
+
+----------------------------------------------------------------------------------------------------
+
+https://www.algoexpert.io/questions/max-subset-sum-no-adjacent
+
+def maxSubsetSumNoAdjacent(array):
+    # Write your code here.
+
+    maxi1 = 0
+    maxi2 = 0
+
+    for i in array:
+        maxi1, maxi2 = maxi2, max(maxi1 + i, maxi2)
+        #print(f"maxi1: {maxi1}\t\tmaxi2: {maxi2}")
+
+    return max(maxi1, maxi2)
+
+----------------------------------------------------------------------------------------------------
+
+https://www.algoexpert.io/questions/find-kth-largest-value-in-bst
+
+# This is an input class. Do not edit.
+class BST:
+    def __init__(self, value, left=None, right=None):
+        self.value = value
+        self.left = left
+        self.right = right
+
+def findKthLargestValueInBst(tree, k):
+    stak = []
+    while tree or stak:
+        if tree is not None:
+            stak.append(tree)
+            print("append")
+            tree = tree.right
+        else:
+            tree = stak.pop()
+            print("pop")
+            if k == 1:
+                return tree.value
+            else:
+                k = k - 1
+                tree = tree.left
+
+----------------------------------------------------------------------------------------------------
+
+https://www.algoexpert.io/questions/two-number-sum
+
+def twoNumberSum(array, targetSum):
+    twolist = []
+    for i in range(len(array)):
+        for j in range(i + 1, len(array)):
+            if array[i] + array[j] == targetSum:
+                twolist.append(array[i])
+                twolist.append(array[j])
+                return twolist
+                
+    return twolist
+
+----------------------------------------------------------------------------------------------------
+
+https://www.algoexpert.io/questions/validate-subsequence
+
+def isValidSubsequence(array, sequence):
+    seqindex = 0
+    arrindex = 0
+
+    while arrindex != len(array):
+        if array[arrindex] == sequence[seqindex]:
+            seqindex += 1
+            if seqindex == len(sequence):
+                break
+        arrindex +=1
+ 
+    return True if seqindex == len(sequence) else False
+
+----------------------------------------------------------------------------------------------------
+
+https://leetcode.com/problems/two-sum/
+
+class Solution(object):
+    def twoSum(self, nums, target):
+        """
+        :type nums: List[int]
+        :type target: int
+        :rtype: List[int]
+        """
+
+        xs = {}
+
+        for i in range(len(nums)):
+            x = target - nums[i]
+            if x not in xs:
+                xs[nums[i]] = i
+            else:
+                return[xs[x], i]
+
+----------------------------------------------------------------------------------------------------
+
+
+
+
+
+
+
