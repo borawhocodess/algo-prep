@@ -233,8 +233,39 @@ class Solution(object):
 
 ----------------------------------------------------------------------------------------------------
 
+https://www.algoexpert.io/questions/find-closest-value-in-bst
+
+def findClosestValueInBst(tree, target):
+
+    maxdiff = float("inf")
+
+    while tree != None:
+        current_value = tree.value
+        if target > current_value:
+            if maxdiff > target - current_value:
+                maxdiff = target - current_value
+                lastval = tree.value
+            tree = tree.right
+        elif target < current_value:
+            if maxdiff > current_value - target:
+                maxdiff = current_value - target
+                lastval = tree.value
+
+            tree = tree.left
+        else:
+            return tree.value    
+        
+    return lastval
 
 
+# This is the class of the input tree. Do not edit.
+class BST:
+    def __init__(self, value):
+        self.value = value
+        self.left = None
+        self.right = None
+
+----------------------------------------------------------------------------------------------------
 
 
 
