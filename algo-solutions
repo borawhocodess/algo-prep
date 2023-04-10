@@ -267,6 +267,34 @@ class BST:
 
 ----------------------------------------------------------------------------------------------------
 
+https://www.algoexpert.io/questions/branch-sums
 
+# This is the class of the input root. Do not edit it.
+class BinaryTree:
+    def __init__(self, value):
+        self.value = value
+        self.left = None
+        self.right = None
 
+def branchSums(root):
+    sums = []
+    sum = 0
+    bsums(root, sums, sum)
+    return sums
+
+def bsums(node, sums, sum):
+    if node is None: 
+        return
+
+    newsum = sum + node.value
+
+    if node.left is None and node.right is None:
+        sums.append(newsum)
+        return
+
+    bsums(node.left, sums, newsum)
+    bsums(node.right, sums, newsum)
+    
+
+----------------------------------------------------------------------------------------------------
 
