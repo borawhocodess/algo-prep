@@ -298,3 +298,32 @@ def bsums(node, sums, sum):
 
 ----------------------------------------------------------------------------------------------------
 
+https://www.algoexpert.io/questions/valid-ip-addresses
+
+def validIPAddresses(string):
+    iplist = []
+    lenstr = len(string)
+
+    for i in [1, 2, 3]: 
+        for j in [1, 2, 3]: 
+            for k in [1, 2, 3]: 
+                if overflow(len(string), i, j, k):
+                    continue
+                a, b, c, d = string[:i], string[i: i+j], string[i+j:i+j+k], string[i+j+k:]
+                if isvalid(a) and isvalid(b) and isvalid(c) and isvalid(d):
+                    iplist.append(a + "." + b + "." + c + "." + d)
+     
+    return iplist
+
+def overflow(lenstr, i, j, k):
+    return True if i >= lenstr or i + j >= lenstr or i + j + k >= lenstr else False
+
+def isvalid(str):
+    if int(str) > 255:
+        return False
+    if len(str) > 1 and str[0] == "0":
+        return False
+    return True
+
+
+----------------------------------------------------------------------------------------------------
