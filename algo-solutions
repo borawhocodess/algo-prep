@@ -327,3 +327,20 @@ def isvalid(str):
 
 
 ----------------------------------------------------------------------------------------------------
+
+https://www.algoexpert.io/questions/bubble-sort
+
+def bubbleSort(array):
+    didswap = True
+    counter = 0
+    while didswap:
+        didswap = False
+        for i in range(len(array) - 1 - counter):
+            if array[i] > array[i + 1]:
+                array[i], array[i + 1] = array[i + 1], array[i]
+                didswap = True
+        counter += 1
+    return array
+
+----------------------------------------------------------------------------------------------------
+
