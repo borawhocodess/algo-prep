@@ -344,3 +344,44 @@ def bubbleSort(array):
 
 ----------------------------------------------------------------------------------------------------
 
+https://www.algoexpert.io/questions/split-binary-tree
+
+# This is an input class. Do not edit.
+class BinaryTree:
+    def __init__(self, value, left=None, right=None):
+        self.value = value
+        self.left = left
+        self.right = right
+
+
+def splitBinaryTree(tree):
+    suminit = 0
+    
+    halfsum = sumtree(tree, suminit) / 2
+
+    sum, halfsumfound = findhalfsum(tree, suminit, halfsum)
+    
+    return halfsum if halfsumfound else 0
+
+def sumtree(node, sum):
+    return 0 if node is None else node.value + sumtree(node.left, sum) + sumtree(node.right, sum)
+
+def findhalfsum(node, sum, targetsum):
+    if node is None:
+        return 0, False
+        
+    leftsum, leftfound = findhalfsum(node.left, sum, targetsum)
+    rightsum, rightfound = findhalfsum(node.right, sum, targetsum)
+    
+    sum = node.value + leftsum + rightsum
+
+    targetfound = leftfound or rightfound or sum == targetsum
+    
+    return sum, targetfound
+    
+----------------------------------------------------------------------------------------------------
+
+
+
+
+
