@@ -381,7 +381,33 @@ def findhalfsum(node, sum, targetsum):
     
 ----------------------------------------------------------------------------------------------------
 
+https://www.algoexpert.io/questions/task-assignment
 
+def taskAssignment(k, tasks):
+    taskindexes = {}
+    assignments = []
+    sortedtasks = sorted(tasks)
+    taskslength = len(tasks)
 
+    for i in range(taskslength):
+        if tasks[i] in taskindexes: 
+            taskindexes[tasks[i]].append(i)
+        else:
+            taskindexes[tasks[i]] = [i]
 
+    for i in range(int(taskslength / 2)):
+        assignment1 = sortedtasks[i]
+        assignment2 = sortedtasks[taskslength - i - 1]
+
+        assignmentindex1 = taskindexes[assignment1][0]
+        assignmentindex2 = taskindexes[assignment2][0]
+
+        taskindexes[assignment1].pop(0)
+        taskindexes[assignment2].pop(0)
+
+        assignments.append([assignmentindex1, assignmentindex2])
+    
+    return assignments
+
+----------------------------------------------------------------------------------------------------
 
