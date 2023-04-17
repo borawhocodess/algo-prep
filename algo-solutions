@@ -436,5 +436,123 @@ def mergeBinaryTrees(tree1, tree2):
 
 ----------------------------------------------------------------------------------------------------
 
+https://www.algoexpert.io/questions/topological-sort
 
+# ----------- my solution that works but not accepted
 
+def topologicalSort(jobs, deps):
+    jobcomplist = []
+    
+    jobscopy = jobs.copy()
+    
+    while jobs != []:
+        jobscopy = jobs.copy()
+        for jobnum in reversed(jobscopy):
+            print("for", jobnum, ": jobs =", jobs, "deps =", deps)
+            
+            dpndncy = [dep[0] for dep in deps]
+            dpndnt = [dep[1] for dep in deps]
+            if jobnum not in dpndnt:
+                jobcomplist.append(jobnum)
+                jobs.remove(jobnum)
+                depscopy = deps.copy()
+                for dep in depscopy:
+                    if dep[0] == jobnum:
+                        deps.remove(dep)
+        if jobscopy == jobs:
+            return []
+                    
+    return jobcomplist
+
+# ---------- some guys solution. looked from solutions. changed it a bit
+
+def topologicalSort(jobs, deps):
+    jobcomplist = []
+
+    jobgraph = {job:[] for job in jobs}
+
+    visited = []
+    visiting = []
+
+    for dependency, dependent in deps:
+        jobgraph[dependent].append(dependency)
+
+    for job in jobs:
+        if dfs(job, jobgraph, visited, visiting, jobcomplist):
+            return[]
+                    
+    return jobcomplist
+
+def dfs(job, jobgraph, visited, visiting, jobcomplist):
+    if job in visited:
+        return False
+    if job in visiting:
+        return True
+        
+    visiting.append(job)
+
+    for dependency in jobgraph[job]:
+        if dfs(dependency, jobgraph, visited, visiting, jobcomplist):
+            return []
+
+    visiting.remove(job)
+    visited.append(job)
+    jobcomplist.append(job)
+
+    return False
+
+# ---------- algoexpert solution 1. changed it a bit
+
+class node:
+    def __init__(self, job):
+        self.job = job
+        self.dependencies = []
+        self.visited = False
+        self.visiting = False
+
+class graph:
+    def __init__(self, jobs):
+        self.nodes = []
+        self.graph = {}
+        for job in jobs:
+            self.graph[job] = node(job)
+            self.nodes.append(self.graph[job])
+            
+
+def topologicalSort(jobs, deps):
+    jobcomplist = []
+
+    jobgraph = graph(jobs)
+
+    for dependency, dependent in deps:
+        jobgraph.graph[dependent].dependencies.append(jobgraph.graph[dependency])
+
+    nodes = jobgraph.nodes
+
+    while len(nodes):
+        node = nodes.pop()
+        if dfs(node, jobcomplist):
+            return []
+                    
+    return jobcomplist
+
+def dfs(node, jobcomplist):
+    if node.visited:
+        return False
+    if node.visiting:
+        return True
+        
+    node.visiting = True
+
+    for dependency in node.dependencies:
+        if dfs(dependency, jobcomplist):
+            return True
+
+    node.visiting = False
+    node.visited = True
+    
+    jobcomplist.append(node.job)
+
+    return False
+
+    
