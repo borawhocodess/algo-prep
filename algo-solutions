@@ -586,3 +586,15 @@ def dfs(node, array):
 
 ----------------------------------------------------------------------------------------------------
     
+https://www.algoexpert.io/questions/number-of-ways-to-make-change
+
+def numberOfWaysToMakeChange(n, denoms):
+    ways = [1 if i is 0 else 0 for i in range(n + 1)]
+    for denom in denoms:
+        for i in range(denom, n + 1):
+                ways[i] += ways[i - denom]
+    return ways[n]
+    
+----------------------------------------------------------------------------------------------------
+
+
