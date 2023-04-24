@@ -597,4 +597,15 @@ def numberOfWaysToMakeChange(n, denoms):
     
 ----------------------------------------------------------------------------------------------------
 
+https://www.algoexpert.io/questions/min-number-of-coins-for-change
+
+def minNumberOfCoinsForChange(n, denoms):
+    mnoc = [0 if i is 0 else float("inf") for i in range(n + 1)]
+    for denom in denoms:
+        for i in range(n + 1):
+            if i >= denom:
+                mnoc[i] = min(mnoc[i], mnoc[i - denom] + 1)
+    return -1 if mnoc[n] == float("inf") else mnoc[n]
+
+----------------------------------------------------------------------------------------------------
 
