@@ -636,4 +636,28 @@ def numberOfWaysToTraverseGraph(width, height):
 
 ----------------------------------------------------------------------------------------------------
 
+https://www.algoexpert.io/questions/middle-node
+
+# This is an input class. Do not edit.
+class LinkedList:
+    def __init__(self, value):
+        self.value = value
+        self.next = None
+
+
+def middleNode(linkedList):
+    ptr = linkedList
+    len = 0
+    while ptr is not None:
+        ptr = ptr.next
+        len = len + 1
+    ptr = linkedList
+    target = len // 2
+    count = 0
+    while count is not target:
+        ptr = ptr.next
+        count = count + 1
+    return ptr
+
+----------------------------------------------------------------------------------------------------
 
