@@ -661,3 +661,158 @@ def middleNode(linkedList):
 
 ----------------------------------------------------------------------------------------------------
 
+https://www.algoexpert.io/questions/tournament-winner
+
+def tournamentWinner(competitions, results):
+    points = {}
+    index = 0
+    for competition in competitions:
+        if competition[0] not in points:
+            points[competition[0]] = 0
+        if competition[1] not in points:
+            points[competition[1]] = 0
+            
+        result = results[index]
+        
+        if result is 1:
+            points[competition[0]] += 3
+        elif result is 0:
+            points[competition[1]] += 3
+
+        index += 1
+        
+
+    max_value = max(points, key=points.get)
+            
+    return max_value
+
+----------------------------------------------------------------------------------------------------
+
+https://www.algoexpert.io/questions/non-constructible-change
+
+def nonConstructibleChange(coins):
+
+    maxnum = 1
+    currentsum = 0
+
+    if not coins:
+        return maxnum
+
+    if len(coins) is 1:
+        return maxnum if coins != [1] else maxnum + 1
+    
+    sortedcoins = sorted(coins)
+    
+    for coin in sortedcoins:
+        print(coin)
+        if coin is not 1 and coin > currentsum + 1:
+            break
+        else:
+            currentsum += coin
+        maxnum = currentsum
+        
+    
+    return maxnum + 1
+
+----------------------------------------------------------------------------------------------------
+
+https://www.algoexpert.io/questions/transpose-matrix
+
+def transposeMatrix(matrix):
+    r = len(matrix)
+    c = len(matrix[0])
+
+    transposematrix = [[0 for _ in range(r)] for _ in range(c)]
+
+    counter1 = 0
+    counter2 = 0
+
+    for i in matrix:
+        for j in i:
+            print(j)
+            transposematrix[counter1 % c][counter2 % r] = j
+            counter1 += 1
+        counter2 += 1
+
+    print(matrix)
+    print(transposematrix)
+    
+    return transposematrix
+
+----------------------------------------------------------------------------------------------------
+
+https://www.algoexpert.io/questions/spiral-traverse
+
+def spiralTraverse(array):
+
+    spiralarray = []
+    
+    n = len(array)
+    m = len(array[0])
+
+    rightlimit = m - 1
+    downlimit = n - 1
+    leftlimit = 0
+    uplimit = 1
+
+    i = 0
+    j = 0
+
+    state = 1
+
+    counter = 0
+
+    while counter != m * n:
+        print(spiralarray, i, j, state)
+        
+        spiralarray.append(array[i][j])
+
+        if state == 1:
+            if j == rightlimit:
+                rightlimit -= 1
+                state = 2
+                i +=1
+            else:
+                j += 1
+        elif state == 2:
+            if i == downlimit:
+                downlimit -= 1
+                state = 3
+                j -= 1
+            else:
+                i += 1
+        elif state == 3:
+            if j == leftlimit:
+                leftlimit += 1
+                state = 4
+                i -= 1
+            else:
+                j -= 1
+        elif state == 4:
+            if i == uplimit:
+                uplimit += 1
+                state = 1
+                j += 1
+            else:
+                i -= 1
+
+        counter += 1
+
+
+    return spiralarray
+        
+----------------------------------------------------------------------------------------------------
+
+https://www.algoexpert.io/questions/first-duplicate-value
+
+def firstDuplicateValue(array):
+    arraytraversed = []
+    for i in array:
+        if i in arraytraversed:
+            return i
+        else:
+            arraytraversed.append(i)
+    return -1
+
+----------------------------------------------------------------------------------------------------
+
